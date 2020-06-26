@@ -42,15 +42,26 @@ const Button = styled.button`
     }
 `;
 
+const Error = styled.div`
+    background-color: red;
+    color: white;
+    padding: 1rem; 
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2rem;
+`;
+
 
 const Formulario = () => {
 
-    // Creando state
+    // Creando states
     const [datos, guardarDatos] = useState({
         marca: "",
         year: "",
         plan: ""
     })
+
+    const [ error, guardarError ] = useState(false);
 
     // Extraer los valores del state
     const { marca, year, plan } = datos;
@@ -63,10 +74,48 @@ const Formulario = () => {
         })
     }
     
+    // Cuando el usuario presiona submit
+    const cotizarSeguro = e => {
+        e.preventDefault();
+        // Validacion
+        if (marca.trim() === '' || year.trim() === '' || plan.trim() === '') {
+            guardarError(true);
+            return;
+        }
 
+        guardarError(false);
+
+
+        // TO - DO:
+        // #######################################
+        // YEAR
+        // Obtener la diferencia de año
+        // por cada año restar en 3%
+
+        // MARCA
+        // Americano 15%
+        // Asiatico 5%
+        // Europeo 30%
+
+
+        // PLAN
+        // basico aumenta 20%
+        // completo aumenta 50%
+
+        // Total
+    }
+    
 
     return ( 
-        <form>
+        <form
+            // Evento
+            onSubmit={cotizarSeguro}
+        >
+
+            { error
+            ? <Error>Todos los campos son obligatorios</Error>
+            : null}
+
             <Campo>
                 <Label>Marca</Label>
                 <Select
@@ -123,7 +172,7 @@ const Formulario = () => {
                     onChange={obtenerInformacion}
                 /> Completo
             </Campo>
-            <Button type="button">Cotizar</Button>
+            <Button type="submit">Cotizar</Button>
         </form>
      );
 }
