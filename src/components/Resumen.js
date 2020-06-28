@@ -1,4 +1,16 @@
 import React, { Fragment } from 'react';
+import { primerMayuscula } from '../helper'
+import styled from '@emotion/styled';
+
+
+// Styled componentes
+const ContenedorResumen = styled.div`
+    padding: 1rem;
+    text-align: center;
+    background-color: #00838F;
+    color: #FFF;
+    margin-top: 1rem;
+`;
 
 const Resumen = ({ datos }) => {
 
@@ -10,14 +22,14 @@ const Resumen = ({ datos }) => {
     
 
     return ( 
-        <Fragment>
+        <ContenedorResumen>
             <h2>Resumen de cotización</h2>
             <ul>
-                <li>Marca: </li>
-                <li>Plan: </li>
-                <li>Año del auto: </li>
+                <li>Marca: { primerMayuscula(marca) } </li>
+                <li>Plan: { primerMayuscula(plan) } </li>
+                <li>Año del auto: {year} </li>
             </ul>
-        </Fragment>
+        </ContenedorResumen>
         
      );
 }
