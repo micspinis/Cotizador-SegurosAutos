@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
+// Libreria para crear animacion de transicion.
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 
 const Mensaje = styled.p`
@@ -34,7 +36,21 @@ const Resultado = ({ cotizacion }) => {
             ? <Mensaje>Elige marca, año y tipo de seguro</Mensaje> 
             :(
                 <ResultadoCotizacion>
-                    <TextoCotizacion>El total a pagar es: ${cotizacion}</TextoCotizacion>
+                    <TransitionGroup
+                        // Indicamos el tipo de elemento al que se va a aplicar la transicion
+                        component="p"
+                        className="resultado"
+                    >
+                        <CSSTransition
+                            // Notar que es classNames no className 
+                            classNames="resultado"
+                            key={cotizacion}
+                            // Tiempo de animacion
+                            timeout={{ enter: 500, exit: 500 }}
+                        >
+                            <TextoCotizacion>El total a pagar es: ${cotizacion}</TextoCotizacion>
+                        </CSSTransition>
+                    </TransitionGroup>
                 </ResultadoCotizacion>
             )
     );
