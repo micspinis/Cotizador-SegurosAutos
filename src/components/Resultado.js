@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 // Libreria para crear animacion de transicion.
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -38,7 +39,7 @@ const Resultado = ({ cotizacion }) => {
                 <ResultadoCotizacion>
                     <TransitionGroup
                         // Indicamos el tipo de elemento al que se va a aplicar la transicion
-                        component="p"
+                        component="span"
                         className="resultado"
                     >
                         <CSSTransition
@@ -48,12 +49,16 @@ const Resultado = ({ cotizacion }) => {
                             // Tiempo de animacion
                             timeout={{ enter: 500, exit: 500 }}
                         >
-                            <TextoCotizacion>El total a pagar es: ${cotizacion}</TextoCotizacion>
+                            <TextoCotizacion>El total a pagar es: $ <span> {cotizacion} </span></TextoCotizacion>
                         </CSSTransition>
                     </TransitionGroup>
                 </ResultadoCotizacion>
             )
     );
+}
+
+Resultado.propTypes = {
+    cotizacion: PropTypes.number.isRequired
 }
  
 export default Resultado;

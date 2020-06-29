@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from '@emotion/styled'; //Libreria emotion, se usa para el css en style components VER DOCUMENTACION
 
 // styled componentes: Despues de styled.<elemento html> y en un template string escribimos el css
@@ -24,4 +25,8 @@ const Header = ({ titulo }) => {
      );
 }
  
+Header.propTypes = {
+    titulo: PropTypes.string.isRequired
+}
+
 export default Header;
